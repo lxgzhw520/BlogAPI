@@ -1,9 +1,23 @@
 from django.shortcuts import render, redirect
+from .models import Article
 
 
 # Create your views here.
 def index(request):
-    return render(request, 'index.html')
+    articles = Article.objects.values(
+        'id',
+        'img',
+        'name',
+        'desc',
+        'pub_date',
+        'views',
+        'comment_num',
+        'category'
+    )
+    print(articles)
+    return render(request, 'index.html', {
+        'articles': articles
+    })
 
 
 def about(request):

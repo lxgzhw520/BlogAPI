@@ -18,6 +18,7 @@ from ckeditor_uploader.fields import RichTextUploadingField
     点赞数量
     点踩数量
     评论数量
+    文章简介
     文章内容
 2.评论表
     评论时间
@@ -60,7 +61,9 @@ class User(models.Model):
 
 class Article(models.Model):
     author = models.ForeignKey(verbose_name="作者", to="User", on_delete=models.CASCADE)
-    name = models.CharField(max_length=24, verbose_name="标题",unique=True)
+    img = models.ImageField(verbose_name="特色图片", upload_to='articles')
+    name = models.CharField(max_length=24, verbose_name="标题", unique=True)
+    desc = models.TextField(max_length=128, verbose_name="文章简介")
     pub_date = models.DateTimeField(auto_now_add=True, verbose_name="发布时间")
     views = models.IntegerField(verbose_name="浏览量")
     good_num = models.IntegerField(verbose_name="点赞数量")
