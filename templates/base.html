@@ -27,7 +27,9 @@
 {% include '_choose_color.html' %}
 <!-- *****CONFIGURE STYLE (REMOVE ON YOUR PRODUCTION SITE)****** -->
 <div class="main-wrapper">
-    {% include '_search.html' %}
+    {% block search %}
+        {% include '_search.html' %}
+    {% endblock %}
     {% block main %}
     {% endblock %}
     {% include '_footer.html' %}

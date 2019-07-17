@@ -29,7 +29,11 @@ def blog_list(request):
 
 
 def detail(request):
-    return render(request, 'detail.html')
+    id = request.GET.get('id', 1)
+    article = Article.objects.filter(id=id).first()
+    return render(request, 'detail.html', {
+        'article': article
+    })
 
 
 def register(request):
