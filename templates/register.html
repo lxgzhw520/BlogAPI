@@ -1,10 +1,57 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-注册
-</body>
-</html>
+{% extends 'base.html' %}
+{% block title %}
+    博客-注册页
+{% endblock %}
+{% block css %}
+    <style>
+        form {
+            margin-top: 20px;
+            margin-bottom: 150px;
+        }
+
+        h2 {
+            margin-top: 40px;
+        }
+    </style>
+{% endblock %}
+{% block search %}
+
+{% endblock %}
+{% block main %}
+    <div class="container">
+        <h2>用户注册</h2>
+        <form method="post" action="/register/" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="exampleInputEmail1">用户名</label>
+                <input type="text" class="form-control"
+                       id="exampleInputEmail1" aria-describedby="emailHelp"
+                       name="username"
+                       placeholder="请输入用户名">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword1">密码</label>
+                <input type="password" class="form-control"
+                       name="password"
+                       id="exampleInputPassword1" placeholder="请输入密码">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword1">确认密码</label>
+                <input type="password" class="form-control"
+                       name="password1"
+                       id="exampleInputPassword1" placeholder="请确认密码">
+            </div>
+            <div class="form-group">
+                <label for="exampleFormControlFile1">上传头像</label>
+                <input type="file" name="avatar" class="form-control-file" id="exampleFormControlFile1">
+            </div>
+
+            <br>
+            <div class="form-group">
+                <input type="submit" class="btn btn-primary" value="确认">
+            </div>
+            <br>
+            <div>已有账号,<a href="/login/">立即登录</a></div>
+        </form>
+    </div>
+{% endblock %}

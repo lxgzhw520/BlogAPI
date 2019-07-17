@@ -1,7 +1,9 @@
 from django.shortcuts import render, redirect
-from .models import Article, Category
+from .models import Article, Category, User
 # 导入分页函数
-from .libs import get_pagination_list
+from libs.page import get_pagination_list
+# 引入加密功能
+from libs.lock import get_sha256
 
 
 # Create your views here.
@@ -61,12 +63,53 @@ def detail(request):
 
 
 def register(request):
+    # 注册功能的实现
+    if request.method == "POST":
+        username = request.POST.get("username")
+        password = request.POST.get("password")
+        password1 = request.POST.get("password1")
+        avatar = request.FILES.get('avatar')
+        print(username, password, avatar)
+        # 1.密码必须一致,长度大于6位
+        # 2.密码加密
+        # 3.确认数据库不存在该用户
+        # 4.保存进数据库
+        if password == password1 and len(password) > 5:
+            password = get_sha256(password)
+            if not User.objects.filter(name=username):
+                # pass
+                if User.objects.create(name=username, password=password, avatar=avatar):
+                    return redirect('/login/')
+
     return render(request, 'register.html')
 
 
 def login(request):
+    # 登录功能的实现
+    if request.method == "POST":
+        username = request.POST.get('username')
+        password = request.POST.get("password")
+        agree = request.POST.get('agree')
+        print(username, password, agree)
+        # 1.密码加密
+        # 2.去数据库查询比对
+        # 3.判断是否需要七天免登陆
+        password = get_sha256(password)
+        user = User.objects.filter(name=username, password=password).first()
+        if user:
+            if agree:
+                response = redirect('/index/')
+                # 七天免登陆
+                response.set_cookie("username", username, 3600 * 24 * 7)
+                response.set_cookie("avatar", user.avatar, 3600 * 24 * 7)
+                return response
+            return redirect('/index/')
     return render(request, 'login.html')
 
 
 def logout(request):
-    return redirect('/index/')
+    response = redirect('/index/')
+    # 删除cookie
+    response.set_cookie('username', '', -1)
+    response.set_cookie('avatar', '', -1)
+    return response

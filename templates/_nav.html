@@ -1,6 +1,10 @@
 <!--左侧导航栏开始-->
 <header class="header text-center">
-    <h1 class="blog-name pt-lg-4 mb-0"><a href="index.html">理想国的博客</a></h1>
+    {% if  request.COOKIES.username %}
+        <h3 class="blog-name pt-lg-4 mb-0"><a href="index.html">{{ request.COOKIES.username }}</a></h3>
+    {% else %}
+        <h3 class="blog-name pt-lg-4 mb-0"><a href="index.html">理想国的博客</a></h3>
+    {% endif %}
 
     <nav class="navbar navbar-expand-lg navbar-dark">
 
@@ -11,10 +15,25 @@
 
         <div id="navigation" class="collapse navbar-collapse flex-column">
             <div class="profile-section pt-3 pt-lg-0">
-                <img class="profile-image mb-3 rounded-circle mx-auto" src="/static/assets/images/hzw.jpg" alt="image">
+                {% if  request.COOKIES.avatar %}
+                    <img class="profile-image mb-3 rounded-circle mx-auto" src="/media/{{ request.COOKIES.avatar }}"
+                         alt="头像">
+                {% else %}
+                    <img class="profile-image mb-3 rounded-circle mx-auto" src="/static/assets/images/hzw.jpg"
+                         alt="image">
+                {% endif %}
 
                 <div class="bio mb-3">全栈工程师,目标人工智能<br>
-                    <a href="about.html">查看我的更多信息</a></div><!--//bio-->
+                    <a href="about.html">查看我的更多信息</a>
+                    <br>
+                    {% if  request.COOKIES.username %}
+                        <a href="/logout/">注销</a>
+                    {% else %}
+                        <a href="/register/">注册</a>
+                        <a href="/login/">登录</a>
+                    {% endif %}
+
+                </div><!--//bio-->
                 <ul class="social-list list-inline py-3 mx-auto">
                     <li class="list-inline-item"><a href="#"><i class="fab fa-twitter fa-fw"></i></a></li>
                     <li class="list-inline-item"><a href="#"><i class="fab fa-linkedin-in fa-fw"></i></a></li>
