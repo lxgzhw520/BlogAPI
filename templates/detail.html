@@ -1,0 +1,50 @@
+{%extends 'base.html'%}
+{% block title %}
+博客-详情
+{% endblock %}
+{% block main %}
+  <article class="blog-post px-3 py-5 p-md-5">
+    <div class="container">
+      <header class="blog-post-header">
+        <h2 class="title mb-2">文章标题</h2>
+        <div class="meta mb-3"><span class="date">发布时间</span><span class="time">阅读人数</span><span
+                class="comment"><a href="#">评论人数</a></span></div>
+      </header>
+
+      <div class="blog-post-body">
+        <figure class="blog-banner">
+          <a href="#"><img class="img-fluid" src="/static/assets/images/blog/blog-post-banner.jpg" alt="image"></a>
+          <figcaption class="mt-2 text-center image-caption">图片名字: <a href="#?ref=devblog" target="_blank">
+            链接地址</a></figcaption>
+        </figure>
+        <div id="article_detail">
+          文章详情
+        </div>
+
+      </div>
+
+      <!--分页开始-->
+      <nav class="blog-nav nav nav-justified my-5">
+        <a class="nav-link-prev nav-item nav-link rounded-left" href="index.html">上一页<i
+                class="arrow-prev fas fa-long-arrow-alt-left"></i></a>
+        <a class="nav-link-next nav-item nav-link rounded-right" href="blog-list.html">下一页<i
+                class="arrow-next fas fa-long-arrow-alt-right"></i></a>
+      </nav>
+      <!--分页结束-->
+
+
+    </div><!--//container-->
+  </article>
+
+  <!--广告开始-->
+  <section class="promo-section theme-bg-light py-5 text-center">
+    <div class="container">
+      <h2 class="title">广告标题</h2>
+      <p>广告内容</p>
+      <figure class="promo-figure">
+        <a href="#" target="_blank"><img class="img-fluid" src="/static/assets/images/promo-banner.jpg" alt="image"></a>
+      </figure>
+    </div><!--//container-->
+  </section><!--//promo-section-->
+  <!--广告结束-->
+{% endblock %}
