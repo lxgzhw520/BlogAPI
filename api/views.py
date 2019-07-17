@@ -52,6 +52,9 @@ def blog_list(request):
 def detail(request):
     id = request.GET.get('id', 1)
     article = Article.objects.filter(id=id).first()
+    # 浏览量增加的实现
+    article.views += 1
+    article.save()
     return render(request, 'detail.html', {
         'article': article
     })
