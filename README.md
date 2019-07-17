@@ -15,3 +15,22 @@
 -  点击文章进入详情页的功能
 -  分页功能
 -  首页搜索功能
+
+## 1.3 环境依赖说明
+> 依赖环境在requirements.txt里面
+
+## 1.4 安装环境命令
+```
+pip install -r requirements.txt
+```
+## 1.5 启动项目命令
+```
+python manage.py runserver
+```
+
+## 1.6 后台登录
+```
+用户名: lxg
+密码: lxgzhw00
+地址: http://127.0.0.1:8000/admin
+```
