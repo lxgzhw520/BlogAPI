@@ -2,136 +2,86 @@
 {% block title %}
     博客列表
 {% endblock %}
+{% block search %}
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">博客列表</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                {#                <li class="nav-item active">#}
+                {#                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>#}
+                {#                </li>#}
+                {% for category in categorys %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="/blog/list/?id={{ category.id }}">{{ category.name }}</a>
+                    </li>
+                {% empty %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">链接</a>
+                    </li>
+                {% endfor %}
+            </ul>
+            <form class="form-inline my-2 my-lg-0" action="/blog/list/" method="post">
+                {% csrf_token %}
+                <input class="form-control mr-sm-2" type="search" placeholder="请输入搜索内容" aria-label="Search"
+                       name="search">
+                <input class="btn btn-outline-success my-2 my-sm-0" type="submit" value="搜索">
+            </form>
+        </div>
+    </nav>
+{% endblock %}
 {% block main %}
     <section class="blog-list px-3 py-5 p-md-5">
         <div class="container">
-            <!--盒子开始-->
-            <div class="item mb-5">
-                <div class="media">
-                    <img class="mr-3 img-fluid post-thumb d-none d-md-flex"
-                         src="/static/assets/images/blog/blog-post-thumb-1.jpg"
-                         alt="image">
-                    <div class="media-body">
-                        <h3 class="title mb-1"><a href="blog-post.html">文章的标题</a></h3>
-                        <div class="meta mb-1"><span class="date">发布时间</span><span
-                                class="time">阅读人数</span><span class="comment"><a href="#">评论数量</a></span></div>
-                        <div class="intro">
-                            文章简介文章简介文章简介文章简介文章简介文章简介文章简介文章简介文章简介文章简介
-                            文章简介文章简介文章简介文章简介文章简介文章简介文章简介文章简介文章简介文章简介
-                            文章简介文章简介文章简介文章简介文章简介文章简介文章简介文章简介文章简介文章简介
-                        </div>
-                        <a class="more-link" href="blog-post.html">阅读更多 &rarr;</a>
-                    </div><!--//media-body-->
-                </div><!--//media-->
-            </div>
-            <!--盒子结束-->
-            <!--盒子开始-->
-            <div class="item mb-5">
-                <div class="media">
-                    <img class="mr-3 img-fluid post-thumb d-none d-md-flex"
-                         src="/static/assets/images/blog/blog-post-thumb-1.jpg"
-                         alt="image">
-                    <div class="media-body">
-                        <h3 class="title mb-1"><a href="blog-post.html">文章的标题</a></h3>
-                        <div class="meta mb-1"><span class="date">发布时间</span><span
-                                class="time">阅读人数</span><span class="comment"><a href="#">评论数量</a></span></div>
-                        <div class="intro">
-                            文章简介文章简介文章简介文章简介文章简介文章简介文章简介文章简介文章简介文章简介
-                            文章简介文章简介文章简介文章简介文章简介文章简介文章简介文章简介文章简介文章简介
-                            文章简介文章简介文章简介文章简介文章简介文章简介文章简介文章简介文章简介文章简介
-                        </div>
-                        <a class="more-link" href="blog-post.html">阅读更多 &rarr;</a>
-                    </div><!--//media-body-->
-                </div><!--//media-->
-            </div>
-            <!--盒子结束-->
-            <!--盒子开始-->
-            <div class="item mb-5">
-                <div class="media">
-                    <img class="mr-3 img-fluid post-thumb d-none d-md-flex"
-                         src="/static/assets/images/blog/blog-post-thumb-1.jpg"
-                         alt="image">
-                    <div class="media-body">
-                        <h3 class="title mb-1"><a href="blog-post.html">文章的标题</a></h3>
-                        <div class="meta mb-1"><span class="date">发布时间</span><span
-                                class="time">阅读人数</span><span class="comment"><a href="#">评论数量</a></span></div>
-                        <div class="intro">
-                            文章简介文章简介文章简介文章简介文章简介文章简介文章简介文章简介文章简介文章简介
-                            文章简介文章简介文章简介文章简介文章简介文章简介文章简介文章简介文章简介文章简介
-                            文章简介文章简介文章简介文章简介文章简介文章简介文章简介文章简介文章简介文章简介
-                        </div>
-                        <a class="more-link" href="blog-post.html">阅读更多 &rarr;</a>
-                    </div><!--//media-body-->
-                </div><!--//media-->
-            </div>
-            <!--盒子结束-->
-            <!--盒子开始-->
-            <div class="item mb-5">
-                <div class="media">
-                    <img class="mr-3 img-fluid post-thumb d-none d-md-flex"
-                         src="/static/assets/images/blog/blog-post-thumb-1.jpg"
-                         alt="image">
-                    <div class="media-body">
-                        <h3 class="title mb-1"><a href="blog-post.html">文章的标题</a></h3>
-                        <div class="meta mb-1"><span class="date">发布时间</span><span
-                                class="time">阅读人数</span><span class="comment"><a href="#">评论数量</a></span></div>
-                        <div class="intro">
-                            文章简介文章简介文章简介文章简介文章简介文章简介文章简介文章简介文章简介文章简介
-                            文章简介文章简介文章简介文章简介文章简介文章简介文章简介文章简介文章简介文章简介
-                            文章简介文章简介文章简介文章简介文章简介文章简介文章简介文章简介文章简介文章简介
-                        </div>
-                        <a class="more-link" href="blog-post.html">阅读更多 &rarr;</a>
-                    </div><!--//media-body-->
-                </div><!--//media-->
-            </div>
-            <!--盒子结束-->
-            <!--盒子开始-->
-            <div class="item mb-5">
-                <div class="media">
-                    <img class="mr-3 img-fluid post-thumb d-none d-md-flex"
-                         src="/static/assets/images/blog/blog-post-thumb-1.jpg"
-                         alt="image">
-                    <div class="media-body">
-                        <h3 class="title mb-1"><a href="blog-post.html">文章的标题</a></h3>
-                        <div class="meta mb-1"><span class="date">发布时间</span><span
-                                class="time">阅读人数</span><span class="comment"><a href="#">评论数量</a></span></div>
-                        <div class="intro">
-                            文章简介文章简介文章简介文章简介文章简介文章简介文章简介文章简介文章简介文章简介
-                            文章简介文章简介文章简介文章简介文章简介文章简介文章简介文章简介文章简介文章简介
-                            文章简介文章简介文章简介文章简介文章简介文章简介文章简介文章简介文章简介文章简介
-                        </div>
-                        <a class="more-link" href="blog-post.html">阅读更多 &rarr;</a>
-                    </div><!--//media-body-->
-                </div><!--//media-->
-            </div>
-            <!--盒子结束-->
-            <!--盒子开始-->
-            <div class="item mb-5">
-                <div class="media">
-                    <img class="mr-3 img-fluid post-thumb d-none d-md-flex"
-                         src="/static/assets/images/blog/blog-post-thumb-1.jpg"
-                         alt="image">
-                    <div class="media-body">
-                        <h3 class="title mb-1"><a href="blog-post.html">文章的标题</a></h3>
-                        <div class="meta mb-1"><span class="date">发布时间</span><span
-                                class="time">阅读人数</span><span class="comment"><a href="#">评论数量</a></span></div>
-                        <div class="intro">
-                            文章简介文章简介文章简介文章简介文章简介文章简介文章简介文章简介文章简介文章简介
-                            文章简介文章简介文章简介文章简介文章简介文章简介文章简介文章简介文章简介文章简介
-                            文章简介文章简介文章简介文章简介文章简介文章简介文章简介文章简介文章简介文章简介
-                        </div>
-                        <a class="more-link" href="blog-post.html">阅读更多 &rarr;</a>
-                    </div><!--//media-body-->
-                </div><!--//media-->
-            </div>
-            <!--盒子结束-->
-
+            {% for article in articles %}
+                <!--盒子开始-->
+                <div class="item mb-5">
+                    <div class="media">
+                        <img class="mr-3 img-fluid post-thumb d-none d-md-flex"
+                             src="/media/{{ article.img }}"
+                             alt="image">
+                        <div class="media-body">
+                            <h3 class="title mb-1"><a href="blog-post.html">{{ article.name }}</a></h3>
+                            <div class="meta mb-1"><span class="date">发布时间{{ article.pub_date }}</span><span
+                                    class="time">阅读人数{{ article.views }}</span>
+                                <span class="comment"><a href="#">评论数量{{ article.comment_num }}</a></span></div>
+                            <div class="intro">
+                                {{ article.desc }}
+                            </div>
+                            <a class="more-link" href="/detail/?id={{ article.id }}">阅读更多 &rarr;</a>
+                        </div><!--//media-body-->
+                    </div><!--//media-->
+                </div>
+                <!--盒子结束-->
+            {% empty %}
+                <h2>抱歉,暂无您想要搜索的内容</h2>
+                <div>
+                    <a href="/index/">首页</a>
+                    <a href="/blog/list/">博客列表</a>
+                </div>
+            {% endfor %}
 
             <nav class="blog-nav nav nav-justified my-5">
-                <a class="nav-link-prev nav-item nav-link rounded-left" href="index.html">上一页<i
-                        class="arrow-prev fas fa-long-arrow-alt-left"></i></a>
-                <a class="nav-link-next nav-item nav-link rounded-right" href="blog-list.html">下一页<i
-                        class="arrow-next fas fa-long-arrow-alt-right"></i></a>
+                {% if  articles.has_previous %}
+                    <a class="nav-link-prev nav-item nav-link rounded-left"
+                       href="?p={{ articles.previous_page_number }}">上一页<i
+                            class="arrow-prev fas fa-long-arrow-alt-left"></i></a>
+                {% else %}
+                    <a class="nav-link-prev nav-item nav-link rounded-left" href="javascript:;">上一页<i
+                            class="arrow-prev fas fa-long-arrow-alt-left"></i></a>
+                {% endif %}
+
+                {#下一页#}
+                {% if  articles.has_next %}
+                    <a class="nav-link-next nav-item nav-link rounded-right" href="?p={{ articles.next_page_number }}">下一页<i
+                            class="arrow-next fas fa-long-arrow-alt-right"></i></a>
+                {% else %}
+                    <a class="nav-link-next nav-item nav-link rounded-right" href="javascript:;">下一页<i
+                            class="arrow-next fas fa-long-arrow-alt-right"></i></a>
+                {% endif %}
             </nav>
 
         </div>
