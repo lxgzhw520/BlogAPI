@@ -27,20 +27,19 @@
 
                 <div class="text-center">
                     <br>
-                    <span><a href=""><i class="fa fa-thumbs-up"></i>&nbsp;赞</a></span>
+                    <span><a href="?id={{ article.id }}&type=good"><i
+                            class="fa fa-thumbs-up"></i>&nbsp;赞 ({{ article.good_num }})</a></span>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <span><a href=""><i class="fa fa-thumbs-down"></i>&nbsp;踩</a></span>
+                    <span><a href="?id={{ article.id }}&type=bad"><i
+                            class="fa fa-thumbs-down"></i>&nbsp;踩 ({{ article.bad_num }})</a></span>
                     <br>
+                    <br>
+                    {% if  request.session.error %}
+                        <p class="text-danger">{{ request.session.error }}</p>
+                    {% endif %}
                 </div>
 
-                <!--分页开始-->
-                <nav class="blog-nav nav nav-justified my-5">
-                    <a class="nav-link-prev nav-item nav-link rounded-left" href="index.html">上一页<i
-                            class="arrow-prev fas fa-long-arrow-alt-left"></i></a>
-                    <a class="nav-link-next nav-item nav-link rounded-right" href="blog-list.html">下一页<i
-                            class="arrow-next fas fa-long-arrow-alt-right"></i></a>
-                </nav>
-                <!--分页结束-->
+                {#取消分页,或增加推荐文章#}
 
 
             </div><!--//container-->

@@ -64,25 +64,7 @@
                 </div>
             {% endfor %}
 
-            <nav class="blog-nav nav nav-justified my-5">
-                {% if  articles.has_previous %}
-                    <a class="nav-link-prev nav-item nav-link rounded-left"
-                       href="?p={{ articles.previous_page_number }}">上一页<i
-                            class="arrow-prev fas fa-long-arrow-alt-left"></i></a>
-                {% else %}
-                    <a class="nav-link-prev nav-item nav-link rounded-left" href="javascript:;">上一页<i
-                            class="arrow-prev fas fa-long-arrow-alt-left"></i></a>
-                {% endif %}
-
-                {#下一页#}
-                {% if  articles.has_next %}
-                    <a class="nav-link-next nav-item nav-link rounded-right" href="?p={{ articles.next_page_number }}">下一页<i
-                            class="arrow-next fas fa-long-arrow-alt-right"></i></a>
-                {% else %}
-                    <a class="nav-link-next nav-item nav-link rounded-right" href="javascript:;">下一页<i
-                            class="arrow-next fas fa-long-arrow-alt-right"></i></a>
-                {% endif %}
-            </nav>
+            {% include '_pagination.html' %}
 
         </div>
     </section>

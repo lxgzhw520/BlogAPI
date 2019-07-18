@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Article, Category, User
+from .models import Article, Category, User, Good
 # 导入分页函数
 from libs.page import get_pagination_list
 # 引入加密功能
@@ -52,11 +52,41 @@ def blog_list(request):
 
 
 def detail(request):
+    # 刷新错误提示,防止重复出现的bug
+    request.session['error'] = ''
     id = request.GET.get('id', 1)
     article = Article.objects.filter(id=id).first()
     # 浏览量增加的实现
     article.views += 1
     article.save()
+    # 点赞和点踩的实现
+    is_type = request.GET.get('type')
+    if is_type:
+        # 如果当前用户登录
+        user = User.objects.filter(name=request.COOKIES.get('username')).first()
+        if user:
+            # 判断是否点赞过
+            ret = Good.objects.filter(article=article, user=user)
+            if not ret:
+                # 根据点赞和踩进行增加
+                if is_type == "good":
+                    article.good_num += 1
+                    article.save()
+                    Good.objects.create(article=article,
+                                        user=user,
+                                        good_num=1,
+                                        bad_num=0
+                                        )
+                if is_type == 'bad':
+                    article.bad_num += 1
+                    article.save()
+                    Good.objects.create(article=article,
+                                        user=user,
+                                        good_num=0,
+                                        bad_num=1
+                                        )
+            else:
+                request.session['error'] = '您已经对这篇文字点赞或点踩过,不可重复提交哦~'
     return render(request, 'detail.html', {
         'article': article
     })
@@ -69,7 +99,7 @@ def register(request):
         password = request.POST.get("password")
         password1 = request.POST.get("password1")
         avatar = request.FILES.get('avatar')
-        print(username, password, avatar)
+        # print(username, password, avatar)
         # 1.密码必须一致,长度大于6位
         # 2.密码加密
         # 3.确认数据库不存在该用户
