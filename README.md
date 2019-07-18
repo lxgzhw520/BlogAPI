@@ -34,3 +34,9 @@ python manage.py runserver
 密码: lxgzhw00
 地址: http://127.0.0.1:8000/admin
 ```
+
+## 2.1 更新说明
+- 增加点赞功能
+- 增加点踩功能
+- 增加错误提示功能
+> 代码位于detail.html文件+Views文件detail函数中
