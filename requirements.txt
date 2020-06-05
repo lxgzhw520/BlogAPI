@@ -1,6 +1,6 @@
 certifi==2019.6.16
 chardet==3.0.4
-Django==1.11
+Django==1.11.29
 django-ckeditor==5.7.1
 django-cors-headers==3.0.2
 django-js-asset==1.2.2
