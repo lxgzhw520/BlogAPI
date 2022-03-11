@@ -7,7 +7,7 @@ django-js-asset==1.2.2
 django-simpleui==2.1.5
 djangorestframework==3.9.4
 idna==2.8
-Pillow==6.1.0
+Pillow==9.0.1
 pytz==2019.1
 requests==2.22.0
 urllib3==1.25.3
